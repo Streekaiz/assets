@@ -3154,9 +3154,9 @@ end
                     Parent = self.holder,
                     Name = "",
                     FontFace = library.font,
-                    TextColor3 = Color3.fromRGB(170, 170, 170),
+                    TextColor3 = cfg.color,
                     BorderColor3 = Color3.fromRGB(0, 0, 0),
-                    Text = cfg.color,
+                    Text = cfg.name,
                     TextStrokeTransparency = 0.5,
                     BorderSizePixel = 0,
                     BackgroundTransparency = 1,
@@ -3313,9 +3313,9 @@ end
                     Parent = self.holder,
                     Name = "",
                     FontFace = library.font,
-                    TextColor3 = Color3.fromRGB(170, 170, 170),
+                    TextColor3 = cfg.color,
                     BorderColor3 = Color3.fromRGB(0, 0, 0),
-                    Text = cfg.color,
+                    Text = cfg.name,
                     TextStrokeTransparency = 0.5,
                     Size = UDim2.new(1, -26, 0, 12),
                     BorderSizePixel = 0,
@@ -3551,9 +3551,9 @@ end
                     Parent = self.holder,
                     Name = "",
                     FontFace = library.font,
-                    TextColor3 = Color3.fromRGB(170, 170, 170),
+                    TextColor3 = cfg.color,
                     BorderColor3 = Color3.fromRGB(0, 0, 0),
-                    Text = cfg.color,
+                    Text = cfg.name,
                     TextStrokeTransparency = 0.5,
                     Size = UDim2.new(1, -26, 0, 12),
                     BorderSizePixel = 0,
@@ -5224,6 +5224,4 @@ end
     -- 
 -- 
 
---aaa
 return library, library.flags
-
