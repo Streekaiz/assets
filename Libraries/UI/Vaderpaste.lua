@@ -58,7 +58,8 @@ end
         dock_button_holder,  
         gui, 
         sin = 0,
-        keybind_path; 
+        keybind_path;
+        client;
         panel_open = false, 
 
         directory = "mon3tr",
@@ -196,7 +197,6 @@ end
     end 
     
     library.font = Font.new(getcustomasset(library.directory .. "/fonts/main_encoded.ttf"), Enum.FontWeight.Regular)
-    print(library.font)
 -- 
 
 -- functions 
@@ -743,7 +743,7 @@ end
                     BackgroundColor3 = Color3.fromRGB(40, 40, 40)
                 })      
 
-                --[[task.spawn(function()
+                task.spawn(function()
                     while true do 
                         if flags["color_picker_anim_speed"] then 
                             library.sin = math.abs(math.sin(tick() * flags["color_picker_anim_speed"]))
@@ -756,7 +756,7 @@ end
                         end 
                         task.wait()
                     end 
-                end)]]
+                end)
             -- 
 
             -- esp preview
@@ -2079,6 +2079,153 @@ end
                 end)
             -- 
             
+            -- client info 
+                local client; do 
+                    local client_info = library:create("Frame", {
+                        Parent = library.gui,
+                        Name = "",
+                        BorderColor3 = Color3.fromRGB(19, 19, 19),
+                        AnchorPoint = Vector2.new(0, 0.5),
+                        BackgroundTransparency = 1,
+                        Position = UDim2.new(0, 20, 0.5, 0),
+                        ZIndex = 2,
+                        Active = true, 
+                        Draggable = true, 
+                        AutomaticSize = Enum.AutomaticSize.XY,
+                        BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+                    }); client = client_info
+                    
+                    local glow = library:create("ImageLabel", {
+                        Parent = client_info,
+                        Name = "",
+                        ImageColor3 = themes.preset.accent,
+                        ScaleType = Enum.ScaleType.Slice,
+                        ImageTransparency = 0.8999999761581421,
+                        BorderColor3 = Color3.fromRGB(0, 0, 0),
+                        BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+                        Image = "http://www.roblox.com/asset/?id=18245826428",
+                        BackgroundTransparency = 1,
+                        Position = UDim2.new(0, -20, 0, -20),
+                        Size = UDim2.new(1, 40, 0, 42),
+                        ZIndex = 2,
+                        BorderSizePixel = 0,
+                        SliceCenter = Rect.new(Vector2.new(21, 21), Vector2.new(79, 79))
+                    })
+
+                    library:apply_theme(glow, "accent", "ImageColor3") 
+                    
+                    local inline1 = library:create("Frame", {
+                        Parent = client_info,
+                        Name = "",
+                        BorderColor3 = Color3.fromRGB(0, 0, 0),
+                        AutomaticSize = Enum.AutomaticSize.XY,
+                        BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+                    })
+                    
+                    local accent_line = library:create("Frame", {
+                        Parent = inline1,
+                        Name = "",
+                        BorderColor3 = Color3.fromRGB(34, 34, 34),
+                        Size = UDim2.new(1, 0, 0, 5),
+                        BorderSizePixel = 0,
+                        BackgroundColor3 = themes.preset.accent
+                    })
+
+                    library:apply_theme(accent_line, "accent", "BackgroundColor3") 
+                    
+                    local name = library:create("TextLabel", {
+                        Parent = inline1,
+                        Name = "",
+                        FontFace = library.font,
+                        TextColor3 = Color3.fromRGB(170, 170, 170),
+                        BorderColor3 = Color3.fromRGB(0, 0, 0),
+                        Text = "client info",
+
+                        TextStrokeTransparency = 0.5,
+                        BorderSizePixel = 0,
+                        BackgroundTransparency = 1,
+                        Position = UDim2.new(0, 0, 0, -1),
+                        Size = UDim2.new(1, 0, 0, 1),
+                        ZIndex = 12,
+                        TextSize = 12,
+                        BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                    }); library:apply_theme(name, "text", "TextColor3") 
+                    
+                    local inline2 = library:create("Frame", {
+                        Parent = inline1,
+                        Name = "",
+                        Position = UDim2.new(0, 2, 0, 2),
+                        BorderColor3 = Color3.fromRGB(0, 0, 0),
+                        Size = UDim2.new(1, -4, 1, -4),
+                        BorderSizePixel = 0,
+                        BackgroundColor3 = Color3.fromRGB(26, 26, 26)
+                    })
+                    
+                    local main = library:create("Frame", {
+                        Parent = inline2,
+                        Name = "",
+                        Position = UDim2.new(0, 2, 0, 2),
+                        BorderColor3 = Color3.fromRGB(57, 57, 57),
+                        Size = UDim2.new(1, -4, 1, -4),
+                        BackgroundColor3 = Color3.fromRGB(26, 26, 26)
+                    })
+                    
+                    local tab_inline = library:create("Frame", {
+                        Parent = main,
+                        Name = "",
+                        Position = UDim2.new(0, 6, 0, 6),
+                        BorderColor3 = Color3.fromRGB(19, 19, 19),
+                        Size = UDim2.new(1, -12, 1, -12),
+                        BorderSizePixel = 0,
+                        BackgroundColor3 = Color3.fromRGB(19, 19, 19)
+                    })
+                    
+                    local tabs = library:create("Frame", {
+                        Parent = tab_inline,
+                        Name = "",
+                        Position = UDim2.new(0, 2, 0, 2),
+                        BorderColor3 = Color3.fromRGB(56, 56, 56),
+                        Size = UDim2.new(1, -4, 1, -4),
+                        BackgroundColor3 = Color3.fromRGB(22, 22, 22)
+                    })
+                    
+                    local UIPadding = library:create("UIPadding", {
+                        Parent = tabs,
+                        Name = "",
+                        PaddingBottom = UDim.new(0, 22),
+                        PaddingRight = UDim.new(0, 20),
+                        PaddingLeft = UDim.new(0, 20)
+                    })
+                    
+                    local UIListLayout = library:create("UIListLayout", {
+                        Parent = tabs,
+                        Name = "",
+                        SortOrder = Enum.SortOrder.LayoutOrder,
+                        HorizontalAlignment = Enum.HorizontalAlignment.Center,
+                        Padding = UDim.new(0, 3)
+                    })
+                    
+                    local UIStroke = library:create("UIStroke", {
+                        Parent = tabs,
+                        Name = "",
+                        Color = Color3.fromRGB(57, 57, 57),
+                        LineJoinMode = Enum.LineJoinMode.Miter
+                    })
+                    
+                    local depth = library:create("Frame", {
+                        Parent = inline1,
+                        Name = "",
+                        BorderColor3 = Color3.fromRGB(0, 0, 0),
+                        BackgroundTransparency = 0.5,
+                        Position = UDim2.new(0, 0, 0, 1),
+                        Size = UDim2.new(1, 0, 0, 1),
+                        ZIndex = 2,
+                        BorderSizePixel = 0,
+                        BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+                    })
+
+                    library.client = tabs
+                end 
             -- keybind list
                 local old_kblist = library:create("Frame", {
                     Parent = library.gui,
@@ -2144,7 +2291,7 @@ end
                     BackgroundTransparency = 1,
                     Position = UDim2.new(0, 0, 0, -1),
                     Size = UDim2.new(1, 0, 0, 1),
-                    ZIndex = 2,
+                    ZIndex = 12,
                     TextSize = 12,
                     BackgroundColor3 = Color3.fromRGB(255, 255, 255)
                 }); library:apply_theme(name, "text", "TextColor3") 
@@ -2229,6 +2376,10 @@ end
                 old_kblist.Visible = bool 
             end
 
+            function cfg.toggle_client(bool)
+                client.Visible = bool
+            end 
+
             function cfg.toggle_playerlist(bool) 
                 playerlist.Visible = bool 
             end   
@@ -2285,6 +2436,48 @@ end
             end 
 
             cfg.change_text(cfg.text)
+
+            return cfg 
+        end 
+
+        function library:new_client(properties)
+            local cfg = {text = properties.name or properties.text or "?"}
+
+            local aimbot = library:create("TextLabel", {
+                Parent = library.client,
+                Name = "",
+                FontFace = library.font,
+                LineHeight = 1.2000000476837158,
+                TextStrokeTransparency = 0.5,
+                AnchorPoint = Vector2.new(0.5, 0),
+                TextSize = 12,
+                RichText = true,
+                Size = UDim2.new(0, 0, 0, 11),
+                TextColor3 = Color3.fromRGB(170, 170, 170),
+                BorderColor3 = Color3.fromRGB(0, 0, 0),
+                Text = cfg.text,
+                BackgroundTransparency = 1,
+                Position = UDim2.new(0.5, 0, 0, 8),
+                BorderSizePixel = 0,
+                Visible = true, 
+                TextYAlignment = Enum.TextYAlignment.Top,
+                AutomaticSize = Enum.AutomaticSize.X,
+                BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            }); library:apply_theme(aimbot, "text", "TextColor3") 
+            
+            local UIPadding = library:create("UIPadding", {
+                Parent = aimbot,
+                Name = "",
+                PaddingTop = UDim.new(0, 6)
+            })
+
+            function cfg.set_visible(bool)  
+                aimbot.Visible = bool
+            end 
+
+            function cfg.change_text(text)
+                aimbot.Text = text
+            end 
 
             return cfg 
         end 
