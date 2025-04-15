@@ -176,27 +176,27 @@ end
         makefolder(library.directory .. path)
     end 
 
-    if not isfile(library.directory .. "/fonts/main.ttf") then 
-        writefile(library.directory .. "/fonts/main.ttf", game:HttpGet("https://github.com/Streekaiz/assets/raw/refs/heads/main/Fonts/SmallestPixel.ttf"))
+    if not isfile(library.directory .. "/fonts/proggyclean.ttf") then 
+        writefile(library.directory .. "/fonts/proggyclean.ttf", game:HttpGet("https://github.com/Streekaiz/assets/raw/refs/heads/main/Fonts/ProggyTiny.ttf"))
     end 
     
     local tahoma = {
-        name = "SmallestPixel7",
+        name = "ProggyTiny",
         faces = {
             {
                 name = "Regular",
                 weight = 400,
                 style = "normal",
-                assetId = getcustomasset(library.directory .. "/fonts/main.ttf")
+                assetId = getcustomasset(library.directory .. "/fonts/proggyclean.ttf")
             }
         }
     }
     
-    if not isfile(library.directory .. "/fonts/main_encoded.ttf") then 
-        writefile(library.directory .. "/fonts/main_encoded.ttf", http_service:JSONEncode(tahoma))
+    if not isfile(library.directory .. "/fonts/proggyclean_encoded.ttf") then 
+        writefile(library.directory .. "/fonts/progyyclean_encoded.ttf", http_service:JSONEncode(tahoma))
     end 
     
-    library.font = Font.new(getcustomasset(library.directory .. "/fonts/main_encoded.ttf"), Enum.FontWeight.Regular)
+    library.font = Font.new(getcustomasset(library.directory .. "/fonts/proggyclean_encoded.ttf"), Enum.FontWeight.Regular)
 -- 
 
 -- functions 
@@ -5416,5 +5416,15 @@ end
         end 
     -- 
 -- 
+
+if MONT3R then 
+    MONT3R.Library = library 
+    MONT3R.Flags = library.flags
+end 
+
+if MONT3R_ENV then 
+    MONT3R_ENV.Library = library 
+    MONT3R_ENV.Flags = library.flags
+end 
 
 return library, library.flags
