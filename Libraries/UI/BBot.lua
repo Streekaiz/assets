@@ -502,20 +502,8 @@ end
 local configs = {}
 
 local function GetConfigs()
-	local result = {}
-	local directory = "bitchbot\\" .. menu.game
-	for k, v in pairs(listfiles(directory)) do
-		local clipped = v:sub(#directory + 2)
-		if clipped:sub(#clipped - 2) == ".bb" then
-			clipped = clipped:sub(0, #clipped - 3)
-			result[k] = clipped
-			configs[k] = v
-		end
-	end
-	if #result <= 0 then
-		writefile("bitchbot/" .. menu.game .. "/Default.bb", "")
-	end
-	return result
+	
+	return {}
 end
 
 local Players = game:GetService("Players")
@@ -528,7 +516,7 @@ local function UnpackRelations()
 		priority = {},
 	}
 	if str then
-		if str:find("bb:{{") then
+		if str:find("bb:{{") and then
 			writefile("bitchbot/relations.bb", "friends:\npriority:")
 			return
 		end
