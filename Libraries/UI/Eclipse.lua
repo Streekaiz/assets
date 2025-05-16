@@ -980,8 +980,13 @@ do -- menu
                 Image = page.icon;
                 BackgroundTransparency = 1;
                 BorderSizePixel = 0;
-                Position = udim2(0.5, -properties.size.X.Offset / 2, 0.5, -properties.size.Y.Offset / 2);
-                Size = properties.size;
+                Position = udim2(
+                    0.5,
+                    -(typeof(properties.size) == "UDim2" and properties.size.X.Offset or 60) / 2,
+                    0.5,
+                    -(typeof(properties.size) == "UDim2" and properties.size.Y.Offset or 60) / 2
+                ),
+                Size = properties.size;Size = properties.size;
                 ImageColor3 = UI.themes.inactive;
                 Parent = tab_button;
             });
