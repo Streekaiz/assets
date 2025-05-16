@@ -45,7 +45,29 @@ local get_mouse = lplr:GetMouse();
 Instance_manager = framework.modules.instance_manager
 signals = framework.modules.signals
 -- fonts
-local create_font = loadstring(game:HttpGet("https://raw.githubusercontent.com/judghementday2/bypass/refs/heads/main/fonts.lua"))();
+local create_font = {}
+function create_font:register(path, options)
+        local name = options.name
+            local link = options.link
+                local path = path .."/" .. name.. ".ttf"
+
+                    local weight = options.weight
+                        weight = weight:sub(1,1):upper()..weight:sub(2, #weight):lower()
+
+                            local style  = options.style
+                                style = style:sub(1,1):upper()..style:sub(2, #style):lower()
+                                    
+                                        if not isfile(path) then
+                                                writefile(path, game:HttpGet(link))
+                                                    end
+
+                                                        local asset = getcustomasset(path)
+                                                            return Font.new(
+                                                                    asset,
+                                                                            Enum.FontWeight[weight],
+                                                                                    Enum.FontStyle[style]
+                                                                                        )
+                                                                                        end
 local fonts = {
     smallest_pixel = create_font:register("ENHANCEMENTS/MENU/FONTS", {
         name = "smallest pixel",
