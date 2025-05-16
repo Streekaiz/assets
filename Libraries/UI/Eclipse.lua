@@ -2343,7 +2343,7 @@ do -- menu
             Description.Size = UDim2.new(1, 0, 1, 0)
             Description.Position = udim2(0, 0, 0, 15)
             Description.Parent = NewColor
-            Description.Text = Colorpicker.Description
+            Description.Text = Colorpicker.Description or "Description"
         end;
         --
         Colorpicker.Colorpickers = Colorpicker.Colorpickers + 1
@@ -2366,6 +2366,7 @@ do -- menu
             local NewColorpicker = {
                 State = (Properties.state or Properties.State or Properties.def or Properties.Def or Properties.default or Properties.Default or Color3.fromRGB(255, 0, 0)),
                 Alpha = (Properties.alpha or Properties.Alpha or Properties.transparency or Properties.Transparency or 1),
+                Description = (Properties.description or Properties.Description or Properties.Info or Properties.info or "Description"),
                 Callback = (Properties.callback or Properties.Callback or Properties.callBack or Properties.CallBack or function() end),
                 Flag = (Properties.flag or Properties.Flag or Properties.pointer or Properties.Pointer or UI.next_flag()),
             };
