@@ -275,19 +275,18 @@ do -- other
     end;
     --
     blur_effect = cloneref(Instance.new("BlurEffect", lighting));
-    black_bg = Instance_manager.new("TextButton", {
-        Name = "bg_effect";
-        Text = "";
-        AutoButtonColor = false;
-        Size = udim2(9999, 0, 9999, 0);
-        BorderColor3 = UI.themes.outline;
-        Position = udim2(0, 0, 0, -100);
-        ZIndex = -9999;
-        BackgroundColor3 = color3_rgb(0, 0, 0);
-        Visible = UI.autoload;
-        BackgroundTransparency = 0.35;
-        Parent = cloneref(Instance.new("ScreenGui", gethui()));
-    });
+    
+black_bg = Instance_manager.new("Frame", {
+    Name = "bg_effect";
+    Size = udim2(9999, 0, 9999, 0);
+    BorderColor3 = UI.themes.outline;
+    Position = udim2(0, 0, 0, -100);
+    ZIndex = -9999;
+    BackgroundColor3 = color3_rgb(0, 0, 0);
+    Visible = UI.autoload;
+    BackgroundTransparency = 0.35;
+    Parent = cloneref(Instance.new("ScreenGui", gethui()));
+});
 end
 --
 do -- menu
@@ -1017,58 +1016,40 @@ do -- menu
                 Parent = page.window.elements.holder;
             });
             --
+            local gutter = 2
+
             local left = Instance_manager.new("ScrollingFrame", {
                 Name = "left";
-                BackgroundColor3 = UI.themes.background;
-                BorderColor3 = UI.themes.outline;
-                Size = UDim2.new(0.33, -10, 1, 0);
-                ScrollBarThickness = 0;
-                AutomaticCanvasSize = Enum.AutomaticSize.Y; 
-                Parent = new_page;
-            });
+                    BackgroundColor3 = UI.themes.background;
+                        BorderColor3 = UI.themes.outline;
+                            Position = UDim2.new(0, 0, 0, 0);
+                                Size = UDim2.new(1/3, -gutter, 1, 0);
+                                    ScrollBarThickness = 0;
+                                        AutomaticCanvasSize = Enum.AutomaticSize.Y; 
+                                            Parent = new_page;
+                                            });
 
-            Instance_manager.new("UIListLayout", {
-                Name = "UIListLayout";
-                Padding = udim(0, 6);
-                SortOrder = Enum.SortOrder.LayoutOrder;
-                Parent = left;
-            });
+                                            local center = Instance_manager.new("ScrollingFrame", {
+                                                Name = "center";
+                                                    BackgroundColor3 = UI.themes.background;
+                                                        BorderColor3 = UI.themes.outline;
+                                                            Position = UDim2.new(1/3, gutter/2, 0, 0);
+                                                                Size = UDim2.new(1/3, -gutter, 1, 0);
+                                                                    ScrollBarThickness = 0;
+                                                                        AutomaticCanvasSize = Enum.AutomaticSize.Y;
+                                                                            Parent = new_page;
+                                                                            });
 
-            local center = Instance_manager.new("ScrollingFrame", {
-                Name = "center";
-                BackgroundColor3 = UI.themes.background;
-                BorderColor3 = UI.themes.outline;
-                Position = udim2(0.333, 3, 0, 0);
-                Size = udim2(0.333, -12, 1, 0);
-                ScrollBarThickness = 0;
-                AutomaticCanvasSize = Enum.AutomaticSize.Y;
-                Parent = new_page;
-            });
-
-            Instance_manager.new("UIListLayout", {
-                Name = "UIListLayout";
-                Padding = udim(0, 6);
-                SortOrder = Enum.SortOrder.LayoutOrder;
-                Parent = center;
-            });
-
-            local right = Instance_manager.new("ScrollingFrame", {
-                Name = "right";
-                BackgroundColor3 = UI.themes.background;
-                BorderColor3 = UI.themes.outline;
-                Position = udim2(0.666, 6, 0, 0);
-                Size = udim2(0.333, -4, 1, 0);
-                ScrollBarThickness = 0;
-                AutomaticCanvasSize = Enum.AutomaticSize.Y;
-                Parent = new_page;
-            });
-
-            Instance_manager.new("UIListLayout", {
-                Name = "UIListLayout";
-                Padding = udim(0, 6);
-                SortOrder = Enum.SortOrder.LayoutOrder;
-                Parent = right;
-            });
+                                                                            local right = Instance_manager.new("ScrollingFrame", {
+                                                                                Name = "right";
+                                                                                    BackgroundColor3 = UI.themes.background;
+                                                                                        BorderColor3 = UI.themes.outline;
+                                                                                            Position = UDim2.new(2/3, gutter, 0, 0);
+                                                                                                Size = UDim2.new(1/3, -gutter, 1, 0);
+                                                                                                    ScrollBarThickness = 0;
+                                                                                                        AutomaticCanvasSize = Enum.AutomaticSize.Y;
+                                                                                                            Parent = new_page;
+                                                                                                            });
             --
             do -- auto-sizer
                 local tabs = {};
